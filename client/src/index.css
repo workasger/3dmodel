@@ -1,0 +1,275 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --background: 240 10% 3.9%;
+  --foreground: 0 0% 98%;
+  --muted: 240 3.7% 15.9%;
+  --muted-foreground: 240 5% 64.9%;
+  --popover: 240 10% 3.9%;
+  --popover-foreground: 0 0% 98%;
+  --card: 240 10% 3.9%;
+  --card-foreground: 0 0% 98%;
+  --border: 240 3.7% 15.9%;
+  --input: 240 3.7% 15.9%;
+  --primary: 280 100% 60%; /* Purple primary */
+  --primary-foreground: 0 0% 100%;
+  --secondary: 240 3.7% 15.9%;
+  --secondary-foreground: 0 0% 98%;
+  --accent: 280 85% 60%; /* Purple accent */
+  --accent-foreground: 0 0% 98%;
+  --destructive: 0 62.8% 30.6%;
+  --destructive-foreground: 0 0% 98%;
+  --ring: 240 4.9% 83.9%;
+  --radius: 0.5rem;
+  
+  /* Space theme colors */
+  --space-nebula: 280 67% 19%;
+  --space-deep: 240 14% 6%;
+  --success: 122 39% 49%;
+  
+  /* Sky theme colors for light mode */
+  --sky-blue: 210 100% 70%;
+  --sky-light: 210 90% 80%;
+}
+
+.light {
+  --background: 210 100% 95%;
+  --foreground: 215 85% 30%; /* Насыщенный темно-синий для основного текста */
+  --muted: 210 40% 96%; 
+  --muted-foreground: 215 50% 40%; /* Приглушенный синий для вторичного текста */
+  --popover: 0 0% 100%;
+  --popover-foreground: 215 85% 30%;
+  --card: 0 0% 100%;
+  --card-foreground: 215 85% 30%;
+  --border: 214 20% 80%; /* Нежный голубовато-серый для границ */
+  --input: 214 20% 80%;
+  
+  /* Основной акцентный цвет - королевский синий */
+  --primary: 225 80% 50%; 
+  --primary-foreground: 0 0% 100%;
+  
+  /* Вторичный цвет - нежный голубой */
+  --secondary: 210 40% 90%;
+  --secondary-foreground: 215 85% 30%;
+  
+  /* Акцентный цвет - яркий синий */
+  --accent: 210 100% 50%;
+  --accent-foreground: 0 0% 100%;
+  
+  /* Цвет предупреждения - красно-розовый */
+  --destructive: 350 80% 55%;
+  --destructive-foreground: 0 0% 100%;
+  
+  /* Цвет успеха - бирюзовый */
+  --success: 175 80% 40%;
+  
+  /* Цвет фокусировки */
+  --ring: 210 100% 50%;
+  
+  /* Space theme colors - адаптированные для светлой темы */
+  --space-nebula: 225 70% 70%;
+  --space-deep: 214 40% 96%;
+  
+  /* Sky theme colors для фона голубого неба */
+  --sky-blue: 210 100% 80%;
+  --sky-light: 210 90% 90%;
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+
+  body {
+    @apply font-sans antialiased bg-background text-foreground;
+  }
+}
+
+/* Space background - Dark theme */
+.space-background {
+  @apply relative overflow-hidden min-h-screen;
+  background: linear-gradient(to bottom, #1B2735, #090A0F);
+}
+
+/* Sky background - Light theme */
+html.light .space-background {
+  background: linear-gradient(to bottom, #7ab9ff, #c2e4ff, #e8f5ff);
+}
+
+/* Content cards in light theme */
+html.light .bg-space-deep\/80 {
+  background-color: rgba(255, 255, 255, 0.85);
+  backdrop-filter: blur(10px);
+  box-shadow: 0 10px 30px rgba(44, 104, 197, 0.15);
+  border: 1px solid rgba(255, 255, 255, 0.8);
+  border-radius: 16px;
+}
+
+/* Animated stars */
+.star {
+  @apply absolute bg-white rounded-full;
+}
+
+.shooting-star {
+  @apply absolute w-[2px] h-[2px] bg-gradient-to-r from-white/80 to-transparent rotate-45;
+}
+
+/* Animated clouds for light theme */
+.cloud {
+  @apply absolute rounded-full;
+  background: white;
+  border-radius: 50px;
+  box-shadow: 0 8px 15px rgba(41, 107, 209, 0.1);
+}
+
+.cloud:before,
+.cloud:after {
+  content: '';
+  @apply absolute bg-white rounded-full;
+}
+
+.cloud:before {
+  width: 60%;
+  height: 60%;
+  top: -40%;
+  left: 15%;
+  box-shadow: 0 8px 8px rgba(41, 107, 209, 0.05);
+}
+
+.cloud:after {
+  width: 70%;
+  height: 70%;
+  top: -30%;
+  right: 15%;
+  box-shadow: 0 8px 8px rgba(41, 107, 209, 0.05);
+}
+
+/* File upload container */
+.file-upload-container {
+  @apply border-2 border-dashed border-accent/50 transition-all hover:border-accent;
+}
+
+/* Step line */
+.step-line {
+  @apply h-[2px] bg-accent/30;
+}
+
+.step-line.active {
+  @apply bg-accent;
+}
+
+/* Theme toggle */
+.theme-slider {
+  @apply absolute cursor-pointer inset-0 rounded-full bg-gray-700 transition-all duration-300 before:absolute before:content-[''] before:h-5 before:w-5 before:left-1 before:bottom-1 before:bg-white before:rounded-full before:transition-all before:duration-300;
+}
+
+.theme-slider.checked {
+  @apply bg-primary before:translate-x-7;
+}
+
+/* Keyframe animations */
+@keyframes twinkle {
+  0%, 100% {
+    opacity: 0.3;
+  }
+  50% {
+    opacity: 1;
+  }
+}
+
+@keyframes shooting {
+  0% {
+    transform: translateX(0) translateY(0);
+    opacity: 1;
+  }
+  70% {
+    opacity: 1;
+  }
+  100% {
+    transform: translateX(300px) translateY(300px);
+    opacity: 0;
+  }
+}
+
+@keyframes float {
+  0%, 100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-10px);
+  }
+}
+
+@keyframes floating-clouds {
+  0% {
+    transform: translateX(-100%);
+  }
+  100% {
+    transform: translateX(calc(100vw + 100px));
+  }
+}
+
+.animate-twinkle {
+  animation: twinkle 4s ease-in-out infinite;
+}
+
+.animate-shooting {
+  animation: shooting 8s linear infinite;
+}
+
+.animate-float {
+  animation: float 6s ease-in-out infinite;
+}
+
+.animate-floating-clouds {
+  animation: floating-clouds linear infinite;
+}
+
+/* Language select - Dark mode */
+.language-select {
+  @apply appearance-none pr-10 rounded-lg focus:ring-2 focus:ring-accent focus:outline-none transition-colors;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' fill='none' viewBox='0 0 24 24' stroke='white'%3E%3Cpath stroke-linecap='round' stroke-linejoin='round' stroke-width='2' d='M19 9l-7 7-7-7'%3E%3C/path%3E%3C/svg%3E");
+  background-repeat: no-repeat;
+  background-position: right 0.5rem center;
+  background-size: 1em;
+}
+
+/* Language select - Light mode */
+html.light .language-select {
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' fill='none' viewBox='0 0 24 24' stroke='%23333333'%3E%3Cpath stroke-linecap='round' stroke-linejoin='round' stroke-width='2' d='M19 9l-7 7-7-7'%3E%3C/path%3E%3C/svg%3E");
+  @apply bg-white text-gray-800 border border-gray-300;
+}
+
+/* Кнопки в светлой теме - с улучшенными стилями */
+html.light .btn-primary,
+html.light .btn-accent,
+html.light button[type="submit"],
+html.light .btn,
+html.light .button,
+html.light .btn-default {
+  @apply text-white font-medium shadow-md;
+  text-shadow: 0 1px 1px rgba(0, 0, 0, 0.1);
+}
+
+/* Исправление текста в shadcn кнопках */
+html.light [class*='button-']:not([class*='ghost']):not([class*='outline']) {
+  @apply text-white font-medium shadow-md;
+  text-shadow: 0 1px 1px rgba(0, 0, 0, 0.1);
+}
+
+/* Дополнительные улучшения для светлой темы */
+html.light .btn-primary:hover,
+html.light .btn-accent:hover,
+html.light button[type="submit"]:hover,
+html.light [class*='button-']:not([class*='ghost']):not([class*='outline']):hover {
+  @apply shadow-lg;
+  transform: translateY(-1px);
+  transition: all 0.2s ease;
+}
+
+/* Loading spinner */
+.loading-spinner {
+  @apply w-12 h-12 border-4 border-t-primary border-r-transparent border-b-transparent border-l-transparent rounded-full animate-spin;
+}
